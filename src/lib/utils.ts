@@ -28,9 +28,9 @@ export const reverseGeocode = async (latitude:number, longitude:number) => {
   }
 };
 
-// Example Usage:
-reverseGeocode(51.5074, -0.1278).then((location) => {
-  console.log(`City: ${location.city}, Country: ${location.country}`);
-});
+// // Example Usage:
+// reverseGeocode(51.5074, -0.1278).then((location) => {
+//   console.log(`City: ${location.city}, Country: ${location.country}`);
+// });
 
 

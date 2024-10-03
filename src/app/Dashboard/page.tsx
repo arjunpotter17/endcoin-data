@@ -16,12 +16,13 @@ async function getData(): Promise<Payment[]> {
   const updatedData = await Promise.all(
     dataRaw.map(async (item) => {
       const [latitude, longitude] = item.location.split(",");
-      const location = await reverseGeocode(Number(latitude), Number(longitude));
+      // const location = await reverseGeocode(Number(latitude), Number(longitude));
       return {
         ...item,
         latitude: Number(latitude),  // Add latitude and longitude to item
         longitude: Number(longitude),
-        location: `${location.city}, ${location.country}`,
+        location: null
+        // `${location.city}, ${location.country}`,
       };
     })
   );
