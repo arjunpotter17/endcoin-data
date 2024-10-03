@@ -1,16 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import CopyToClipboard from "react-copy-to-clipboard";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { toast } from "sonner";
 
@@ -23,8 +14,9 @@ export type Payment = {
   timeStamp: string;
   endBalance: number;
   gaiaBalance: number;
+  latitude: number;
+  longitude: number;
 };
-
 
 export const columns: ColumnDef<Payment>[] = [
   {
@@ -32,9 +24,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: "User Pubkey",
     cell: ({ row }) => {
       const key = row.getValue("key") as string;
-
       return (
-        
         <CopyToClipboard
           text={key}
           onCopy={() => toast.success("Copied to Clipboard")}
@@ -110,17 +100,21 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "timeStamp",
     // header: "Recorded At",
-    header: (data) => {
+    header: () => {
       return (
-        <div className="flex gap-x-2 items-center">
-          Recorded At (GMT)
-        </div>
+        <div className="flex gap-x-2 items-center">Recorded Time (GMT)</div>
       );
     },
     cell: ({ row }) => {
       const time = row.getValue("timeStamp") as string;
 
       return <div className="font-medium">{time}</div>;
+    },
+  },
+  {
+    accessorKey: "location",
+    header: () => {
+      return <div className="flex gap-x-2 items-center">Device Location</div>;
     },
   },
   {
@@ -134,7 +128,7 @@ export const columns: ColumnDef<Payment>[] = [
     },
     cell: ({ row }) => {
       const temp = row.getValue("sst") as string;
-            return <div className="text-right font-medium">{temp}°C</div>;
-        },
+      return <div className="text-right font-medium">{temp}°C</div>;
     },
+  },
 ];
