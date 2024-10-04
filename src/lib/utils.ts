@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import axios from 'axios';
+import { Payment } from "@/app/Dashboard/columns";
+import { data } from "@/constants/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -32,5 +34,24 @@ export const reverseGeocode = async (latitude:number, longitude:number) => {
 // reverseGeocode(51.5074, -0.1278).then((location) => {
 //   console.log(`City: ${location.city}, Country: ${location.country}`);
 // });
+
+
+export async function getData(): Promise<Payment[]> {
+  const dataRaw = data;
+  const updatedData = await Promise.all(
+    dataRaw.map(async (item) => {
+      const [latitude, longitude] = item.location.split(",");
+      // const location = await reverseGeocode(Number(latitude), Number(longitude));
+      return {
+        ...item,
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+        location: null
+        // `${location.city}, ${location.country}`,
+      };
+    })
+  );
+  return updatedData;
+}
 
 
