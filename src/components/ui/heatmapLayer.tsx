@@ -38,20 +38,18 @@ const HeatmapLayer: React.FC<HeatmapLayerProps> = ({ data }) => {
 };
 
 // Main MapComponent
-const MapComponent = () => {
+const MapComponent = ({data}:{data:any}) => {
   const [isMounted, setIsMounted] = useState(false);
   const [heatmapData, setHeatmapData] = useState<[number, number, number][]>([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const updatedData = await getData();
-      const heatmapPoints = updatedData.map(
-        (item) => [item.latitude, item.longitude, 1] as [number, number, number]
+    if(data){
+      const heatmapPoints = data.map(
+        (item: any) => [item.Latitude, item.Longitude, 1] as [number, number, number]
       );
       setHeatmapData(heatmapPoints);
     }
-    fetchData();
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     setIsMounted(true);

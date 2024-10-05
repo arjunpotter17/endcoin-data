@@ -8,22 +8,23 @@ import { toast } from "sonner";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
-  key: string;
-  sst: string;
-  deviceId: string;
-  timeStamp: string;
-  endBalance: number;
-  gaiaBalance: number;
-  latitude: number;
-  longitude: number;
+  Wallet_address: string;
+  SST_value: string;
+  Device_id: string;
+  Time: string;
+  End_balance: number;
+  Gaia_balance: number;
+  Location: String;
+  Latitude: number;
+  Longitude: number;
 };
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "key",
+    accessorKey: "Wallet_address",
     header: "User Pubkey",
     cell: ({ row }) => {
-      const key = row.getValue("key") as string;
+      const key = row.getValue("Wallet_address") as string;
       return (
         <CopyToClipboard
           text={key}
@@ -35,11 +36,11 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
-    accessorKey: "deviceId",
+    accessorKey: "Device_id",
     header: "Device ID",
   },
   {
-    accessorKey: "endBalance",
+    accessorKey: "End_balance",
     header: () => {
       return (
         <div className="font-medium flex gap-x-2 items-center justify-start">
@@ -58,7 +59,7 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
     cell: ({ row }) => {
-      const gaia = row.getValue("endBalance") as string;
+      const gaia = row.getValue("End_balance") as string;
 
       return (
         <div className="font-medium flex gap-x-3 items-center justify-start">
@@ -68,7 +69,7 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
-    accessorKey: "gaiaBalance",
+    accessorKey: "Gaia_balance",
     header: () => {
       return (
         <div className="font-medium flex gap-x-2 items-center justify-start">
@@ -87,7 +88,7 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
     cell: ({ row }) => {
-      const gaia = row.getValue("gaiaBalance") as string;
+      const gaia = row.getValue("Gaia_balance") as string;
 
       return (
         <div className="font-medium flex gap-x-3 items-center justify-start">
@@ -98,7 +99,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 
   {
-    accessorKey: "timeStamp",
+    accessorKey: "Time",
     // header: "Recorded At",
     header: () => {
       return (
@@ -106,19 +107,26 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
     cell: ({ row }) => {
-      const time = row.getValue("timeStamp") as string;
+      const time = row.getValue("Time") as string;
 
       return <div className="font-medium">{time}</div>;
     },
   },
   {
-    accessorKey: "location",
+    accessorKey: "Location",
     header: () => {
       return <div className="flex gap-x-2 items-center">Device Location</div>;
     },
+    cell: ({ row }) => {
+      const latitude = row.getValue("Location") as String;
+      const longitude = row.getValue("Location") as String;
+      const location = `${latitude.split(',')[0]}, ${longitude.split(',')[1]}`;
+
+      return <div className="font-medium">{location}</div>;
+    },
   },
   {
-    accessorKey: "sst",
+    accessorKey: "SST_value",
     header: () => {
       return (
         <div className="flex justify-end items-center text-right">
@@ -127,7 +135,7 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
     cell: ({ row }) => {
-      const temp = row.getValue("sst") as string;
+      const temp = row.getValue("SST_value") as string;
       return <div className="text-right font-medium">{temp}°C</div>;
     },
   },
