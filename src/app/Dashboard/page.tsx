@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
 import dynamic from "next/dynamic";
-import { fetcher, getData } from "@/lib/utils";
+import { fetcher } from "@/lib/utils";
 
 const HeatmapLayer = dynamic(() => import("@/components/ui/heatmapLayer"), {
   ssr: false,

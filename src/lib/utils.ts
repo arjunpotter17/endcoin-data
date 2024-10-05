@@ -36,23 +36,23 @@ export const reverseGeocode = async (latitude:number, longitude:number) => {
 // });
 
 
-export async function getData(): Promise<Payment[]> {
-  const dataRaw = data;
-  const updatedData = await Promise.all(
-    dataRaw.map(async (item) => {
-      const [latitude, longitude] = item.location.split(",");
-      // const location = await reverseGeocode(Number(latitude), Number(longitude));
-      return {
-        ...item,
-        latitude: Number(latitude),
-        longitude: Number(longitude),
-        location: null
-        // `${location.city}, ${location.country}`,
-      };
-    })
-  );
-  return updatedData;
-}
+// export async function getData(): Promise<Payment[]> {
+//   const dataRaw = data;
+//   const updatedData = await Promise.all(
+//     dataRaw.map(async (item) => {
+//       const [latitude, longitude] = item.location.split(",");
+//       // const location = await reverseGeocode(Number(latitude), Number(longitude));
+//       return {
+//         ...item,
+//         latitude: Number(latitude),
+//         longitude: Number(longitude),
+//         location: null
+//         // `${location.city}, ${location.country}`,
+//       };
+//     })
+//   );
+//   return updatedData;
+// }
 
 export const fetcher = (url:string) => fetch(url).then((res) => {
   if (!res.ok) {

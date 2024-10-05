@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet.heat";
 import "leaflet/dist/leaflet.css";
-import { getData } from "@/lib/utils";
 
 // HeatmapLayer Component
 type HeatmapLayerProps = {
